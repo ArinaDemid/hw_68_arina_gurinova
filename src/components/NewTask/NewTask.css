@@ -1,0 +1,21 @@
+.NewTask_form {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin: 30px 20px;
+}
+
+.NewTask_group {
+  width: 500px;
+}
+
+.NewTask_button {
+  width: 60px;
+  height: 60px;
+  margin: 33px 0 0 20px;
+}
+
+label {
+  text-align: center;
+  padding-left: 40px;
+}

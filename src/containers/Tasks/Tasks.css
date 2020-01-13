@@ -1,0 +1,17 @@
+.Tasks {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 600px;
+  height: 600px;
+  background-color: antiquewhite;
+  margin: 5px;
+  padding: 10px;
+  border: 1px solid rgb(116, 114, 112);
+  border-radius: 10px;
+}
+
+.Tasks_block_title {
+  font-size: 30px;
+  text-align: center;
+}
