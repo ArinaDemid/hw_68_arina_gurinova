@@ -124,8 +124,7 @@ export const submitTask = (event, taskText) => {
   }
 };
 
-export const deleteTask = (event, id) => {
-  event.preventDefault();
+export const deleteTask = (id) => {
   return dispatch => {
     axiosOrders.delete('/tasks/' + id + '.json');
     dispatch(deleteTaskSuccess(id));

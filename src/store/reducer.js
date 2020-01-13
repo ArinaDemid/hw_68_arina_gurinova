@@ -33,7 +33,7 @@ const reducer = (state = initialState, action) => {
     case CHANGE_TASK:
       return {...state, text: action.value};
     case DELETE_TASK:
-      return {...state, tasks: state.tasks};
+      return { ...state, tasks: state.tasks };
     default:
       return state;
   }

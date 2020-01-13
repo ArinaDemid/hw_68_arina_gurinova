@@ -5,18 +5,21 @@ import NewTask from '../../components/NewTask/NewTask';
 import {connect} from "react-redux";
 import {fetchTask, submitTask, valueChange, deleteTask} from '../../store/actions';
 
-let stateTask = null;
-let taskText = null;
-
 class Tasks extends Component{
 
   componentDidMount() {
     this.props.fetchTask();
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.tasks !== this.props.tasks || prevProps.text !== this.props.text) {
+      this.props.fetchTask();
+    }
+  }
+
   render() {
-    taskText = {text: this.props.text};
-    stateTask = this.props.tasks;
+    const taskText = {text: this.props.text};
+    const stateTask = this.props.tasks;
     let tasks = null;
     if (stateTask) {
       tasks = (
@@ -24,7 +27,7 @@ class Tasks extends Component{
           <div className='Task' key={id}>
             <Task
               text={stateTask[id].text}
-              delete={(event) => this.props.deleteTask(event, id)}
+              delete={() => this.props.deleteTask(id)}
               id={id}
             />
           </div>
@@ -34,7 +37,10 @@ class Tasks extends Component{
 
     return (
       <Fragment>
-        <NewTask valueChange={(event) => this.props.valueChange(event.target.value)} submit={this.props.submitTask} value={this.props.text}/>
+        <NewTask  valueChange={(event) => this.props.valueChange(event.target.value)} 
+                  submit={(event) => this.props.submitTask(event, taskText)} 
+                  value={this.props.text}
+        />
         <div className='Tasks'>
           {tasks}
         </div>
@@ -52,10 +58,10 @@ const mapStateToProps= state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    submitTask: (event) => dispatch(submitTask(event, taskText)),
+    submitTask: (event, taskText) => dispatch(submitTask(event, taskText)),
     valueChange: (value) => dispatch(valueChange(value)),
     fetchTask: () => dispatch(fetchTask()),
-    deleteTask: (event, id) => dispatch(deleteTask(event, id))
+    deleteTask: (id) => dispatch(deleteTask(id))
   };
 };
 

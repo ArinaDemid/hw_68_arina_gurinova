@@ -4,17 +4,18 @@ import {connect} from "react-redux";
 import {addCounter, decrementCounter, incrementCounter, subtractCounter, fetchCounter} from "../../store/actions";
 import Spinner from '../../components/UI/Spinner/Spinner';
 
-let count = null;
+let amount = null;
 
 class Counter extends Component {
 
   componentDidMount() {
     this.props.fetchCounter();
   }
+
   render() {
-    count = this.props.counter;
+    amount = this.props.counter;
     let counter = null;
-    if (count) {
+    if (amount) {
       counter = <h1>{this.props.counter}</h1>;
     } else {
       counter = <Spinner />;
@@ -39,10 +40,10 @@ const mapStateToProps= state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    increaseCounter: () => dispatch(incrementCounter(count)),
-    decreaseCounter: () => dispatch(decrementCounter(count)),
-    addCounter: () => dispatch(addCounter(count)),
-    subtractCounter: () => dispatch(subtractCounter(count)),
+    increaseCounter: () => dispatch(incrementCounter(amount)),
+    decreaseCounter: () => dispatch(decrementCounter(amount)),
+    addCounter: () => dispatch(addCounter(amount)),
+    subtractCounter: () => dispatch(subtractCounter(amount)),
     fetchCounter: () => dispatch(fetchCounter())
   };
 };
